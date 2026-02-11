@@ -1,0 +1,167 @@
+/* --- Global Styles --- */
+body {
+    margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
+    background-image: url("heart-bg.jpg"); background-size: cover; background-position: center;
+    font-family: "Pixelify Sans", sans-serif; overflow: hidden;
+}
+
+#envelope-container { text-align: center; cursor: pointer; }
+#envelope { width: 180px; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+#letter-container { display: none; position: fixed; inset: 0; justify-content: center; align-items: center; z-index: 10; }
+.letter-window {
+    width: 95vw; max-width: 700px; padding: 140px 20px 20px 20px;
+    display: flex; flex-direction: column; align-items: center;
+    background-image: url("window.png"); background-size: 100% 100%;
+    transform: scale(1.2); opacity: 0; transition: 0.6s ease;
+}
+.letter-window.open { transform: scale(1); opacity: 1; }
+
+/* --- Sideways Buttons --- */
+.buttons { display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 30px; margin-top: 10px; }
+.btn { width: 100px; cursor: pointer; transition: 0.3s; }
+.no-wrapper { width: 100px; height: 50px; position: relative; }
+
+/* --- Gift Box Wiggle --- */
+.gift-box { cursor: pointer; transition: 0.3s; }
+.sub-gift { width: 90px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
+.presents-row { display: flex; justify-content: center; gap: 15px; }
+.wiggle:hover { animation: giftWiggle 0.5s ease infinite; }
+@keyframes giftWiggle { 
+    0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(5deg); } 75% { transform: rotate(-5deg); } 
+}
+
+/* --- Modals --- */
+.modal { 
+    display: none; position: fixed; inset: 0; 
+    background: rgba(0, 0, 0, 0.9); 
+    justify-content: center; align-items: center; z-index: 1000; 
+}
+
+/* --- Gift 1: Attractive White Gallery --- */
+.gallery-wrapper.custom-layout {
+    background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 100%);
+    border: 10px solid #ffffff; 
+    border-radius: 20px; 
+    padding: 30px; 
+    width: 90%; 
+    max-width: 1000px;
+    position: relative;
+    box-shadow: 0 0 30px rgba(255, 182, 193, 0.8);
+}
+
+.gallery-grid { 
+    display: grid; 
+    grid-template-columns: 1.5fr 180px 1.5fr; /* Wider center for strip */
+    gap: 20px; 
+    align-items: center;
+}
+
+/* White Polaroid Styling */
+.polaroid-item.red-theme { 
+    background: white; 
+    padding: 15px 15px 35px 15px; 
+    box-shadow: 8px 12px 25px rgba(0,0,0,0.1); 
+    text-align: center; 
+    transform: rotate(-1.5deg);
+    transition: transform 0.3s;
+}
+
+.polaroid-item.red-theme:hover { transform: scale(1.05) rotate(0deg); z-index: 5; }
+
+.polaroid-item.red-theme img { 
+    width: 100%; 
+    height: auto;
+    border: 1px solid #f0f0f0; 
+    display: block;
+}
+
+.polaroid-item.red-theme p { 
+    color: #555; 
+    margin-top: 15px; 
+    font-size: 1.1rem; 
+    font-weight: bold;
+}
+
+/* --- Center Photo Strip with Scroll --- */
+.center-strip { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    height: 450px; /* Fixed height to allow scrolling */
+}
+.slot-top { width: 150px; height: 15px; background: #e0e0e0; border: 3px solid #ccc; border-radius: 8px 8px 0 0; z-index: 10; }
+
+.photo-strip-container {
+    width: 150px;
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scroll */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.photo-strip-container::-webkit-scrollbar { display: none; } /* Hide scrollbar for Chrome/Safari */
+
+.photo-strip { 
+    padding: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+.strip-img { width: 130px; height: 130px; object-fit: cover; border: 1px solid #eee; }
+
+@keyframes printStrip { from { transform: translateY(-50%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.photo-strip.printing { animation: printStrip 2.5s ease-out forwards; }
+
+/* --- Responsive Mobile Tweaks --- */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        justify-items: center;
+    }
+    
+    .center-strip { order: -1; height: 350px; margin-bottom: 20px; } 
+    
+    .gallery-wrapper.custom-layout {
+        padding: 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .letter-window {
+        transform: scale(1) !important;
+        padding-top: 120px;
+        background-size: cover;
+    }
+}
+
+/* --- Gift 2 Flower Note --- */
+.flower-layout-wrapper {
+    background: white;
+    padding: 30px; width: 85%; max-width: 800px; border-radius: 20px; position: relative;
+}
+.flower-content { display: flex; align-items: center; justify-content: space-around; gap: 20px; }
+
+@media (max-width: 600px) {
+    .flower-content { flex-direction: column; text-align: center; }
+    .bouquet-img-large { width: 220px !important; }
+}
+
+.sticky-note { background: #ffcbd5; padding: 25px; width: 220px; text-align: center; box-shadow: 5px 5px 15px rgba(0,0,0,0.15); }
+.bouquet-img-large { width: 320px; animation: float 3s infinite; }
+
+/* --- Gift 3 Kisses --- */
+.kiss-particle { position: fixed; bottom: -10%; font-size: 2.5rem; z-index: 2000; pointer-events: none; animation: kissFloat 3s linear forwards; }
+@keyframes kissFloat {
+    0% { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-120vh) translateX(60px) scale(1.5); opacity: 0; }
+}
+
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.heart-particle { position: absolute; bottom: -10%; animation: floatUp 4s linear forwards; pointer-events: none; }
+@keyframes floatUp { to { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+
+.close-flower, .close-polaroid { position: absolute; top: 10px; right: 15px; font-size: 30px; cursor: pointer; color: #999; z-index: 100; }
+.back-btn { margin-top: 15px; background: #ff4d6d; color: white; border-radius: 50%; width: 45px; height: 45px; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
